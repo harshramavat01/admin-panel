@@ -1,21 +1,33 @@
-import React from 'react';
-import Layout from './Components/Layout';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import Medicine from './Containers/Medicine';
-import Patients from './Containers/Patients';
+import './App.css';
+import Layout from './components/Layout/Layout'
+import { Route, Switch } from 'react-router-dom';
+import Dashboard from './containers/Dashboard/Dashboard';
+import Doctors from './containers/Doctors/Doctors';
+import Medicines from './containers/Medicine/Medicines';
+import Patients from './containers/Patients/Patients';
+import { Provider } from 'react-redux';
+import { configureStore } from './redux/store';
+import Counter from './containers/Counter/Counter';
 
-const App = () => {
+function App() {
+  const store = configureStore();
   return (
     <>
-      <Layout >
-        <Switch>
-          <Route exact path="/medicine" component={Medicine} />
-          <Route exact path="/patient" component={Patients} />
-          <Redirect to="/medicine" />
-        </Switch>
-      </Layout>
+      <Provider store={store}>
+        {/* <SnackbarProvider maxSnack={3}> */}
+          <Layout>
+            <Switch>
+              <Route exact path="/" component={Dashboard} />
+              <Route exact path="/doctors" component={Doctors} />
+              <Route exact path="/medicines" component={Medicines} />
+              <Route exact path="/patients" component={Patients} />
+              <Route exact path="/counter" component={Counter} />
+            </Switch>
+          </Layout>
+        {/* </SnackbarProvider> */}
+      </Provider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
