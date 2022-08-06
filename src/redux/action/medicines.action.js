@@ -6,7 +6,7 @@ export const getMedicines = () => (dispatch) => {
         dispatch(loadingMedicines())
 
         setTimeout(function () {
-            fetch(BASE_URL + 'medicines/'+ id)
+            fetch(BASE_URL + 'medicines/')
                 .then(response => {
                     if (response.ok) {
                         return response;
